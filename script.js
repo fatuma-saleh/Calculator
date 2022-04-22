@@ -9,7 +9,9 @@ class Calculator {
     this.previousOperand = "";
     this.operation = undefined;
   }
-  delete() {}
+  delete() {
+    this.currentOperand = this.currentOperand.toString().slice(0,-1)
+  }
   appendNumber(number) {
     if (number === "." && this.currentOperand.includes(".")) return;
     this.currentOperand = this.currentOperand.toString() + number.toString();
@@ -84,5 +86,9 @@ equalsButtons.addEventListener("click", (button) => {
 
 allClearButtons.addEventListener("click", (button) => {
   calculator.clear();
+  calculator.updateDisplay();
+});
+deleteButtons.addEventListener("click", (button) => {
+  calculator.delete();
   calculator.updateDisplay();
 });
