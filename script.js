@@ -18,7 +18,7 @@ class Calculator {
   }
   chooseOperation(operation) {
     if (this.currentOperand === "") return;
-    if (this.currentOperand !== "") {
+    if (this.currentOperand != "") {
       this.compute();
     }
     this.operation = operation;
@@ -52,13 +52,32 @@ class Calculator {
   }
 
 displayNumberFormat(number){
-  const floatNumber = parseFloat(number)
-  return number
-}
+  const stringNumber = number.toString()
+  const intDigit = parseFloat(stringNumber.split('.')[0])
+  const decDigit = stringNumber.split('.')[1]
+  let integerDisplay
+  if(isNaN(intDigit)){
+    integerDisplay = ""
+  }else{
+    integerDisplay = intDigit.toLocaleString('en',{
+      maximumFractionDigits: 0})
+    
+  }
+  if(decDigit != null){
+    return`${integerDisplay}.${decDigit}`
+  }else{
+    return integerDisplay
+  }
+//   const floatNumber = parseFloat(number)
+//   if(isNaN(floatNumber)) return ""
+//   return floatNumber.toLocaleString("en")
+ }
   updateDisplay() {
     this.currentTextElement.innerText = this.displayNumberFormat(this.currentOperand);
-    if(this.operation !== null){
+    if(this.operation != null){
     this.previousTextElement.innerText = `${this.displayNumberFormat(this.previousOperand)} ${this.operation}`;
+    }else{
+      this.previousTextElement.innerText = ""
     }
   }
 }
