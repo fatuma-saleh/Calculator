@@ -11,10 +11,14 @@ class Calculator {
   }
   delete() {}
   appendNumber(number) {
-    if(number === "." && this.currentOperand.includes(".")) return
+    if (number === "." && this.currentOperand.includes(".")) return;
     this.currentOperand = this.currentOperand.toString() + number.toString();
   }
-  chooseOperation(operation) {}
+  chooseOperation(operation) {
+    this.operation = operation;
+    this.previousOperand = this.currentOperand;
+    this.currentOperand = " ";
+  }
   compute() {}
   updateDisplay() {
     this.currentTextElement.innerText = this.currentOperand;
@@ -37,9 +41,9 @@ numberButtons.forEach((button) => {
   });
 });
 
-OperationButtons.forEach((button) => {
+operationButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    calculator.appendNumber(button.innerText);
+    calculator.chooseOperation(button.innerText);
     calculator.updateDisplay();
   });
 });
