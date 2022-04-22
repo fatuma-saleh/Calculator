@@ -50,9 +50,16 @@ class Calculator {
     this.operation = undefined
     this.previousOperand = ""
   }
+
+displayNumberFormat(number){
+  const floatNumber = parseFloat(number)
+  return number
+}
   updateDisplay() {
-    this.currentTextElement.innerText = this.currentOperand;
-    this.previousTextElement.innerText = this.previousOperand;
+    this.currentTextElement.innerText = this.displayNumberFormat(this.currentOperand);
+    if(this.operation !== null){
+    this.previousTextElement.innerText = `${this.displayNumberFormat(this.previousOperand)} ${this.operation}`;
+    }
   }
 }
 
